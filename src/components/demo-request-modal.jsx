@@ -64,7 +64,7 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
     setStatus(null);
 
     try {
-      const res = await fetch("/api/send-mail", {
+      const res = await fetch("https://wael-server-1.onrender.com/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
