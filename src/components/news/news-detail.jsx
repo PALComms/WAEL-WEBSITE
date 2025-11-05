@@ -36,7 +36,7 @@ export default function NewsDetail({
         <header className="text-left mb-12">
           <span className="font-medium bg-[#113264] rounded-lg px-4 py-2 text-white ">{categories}</span>
 
-          <h1 className="text-4xl mt-6 md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          <h1 className="text-4xl mt-6 max-w-6xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             {title}
           </h1>
           {/* Author and Date */}
@@ -46,6 +46,7 @@ export default function NewsDetail({
                 <Image
                   src={author.imageUrl}
                   alt=""
+                  priority
                   width={40}
                   height={40}
                   className="rounded-full object-cover h-full w-full"

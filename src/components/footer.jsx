@@ -62,7 +62,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-[#122A5C] text-white py-10 relative overflow-hidden">
+      <footer className="bg-[#122A5C] mt-auto text-white py-10 relative overflow-hidden">
         {/* Faint background text */}
         <div className="absolute inset-0 flex items-end justify-center text-6xl sm:text-8xl md:text-[10rem] font-extrabold text-[#1A3D7A]/10 select-none tracking-widest pointer-events-none animate-fade-in">
           WAELNG

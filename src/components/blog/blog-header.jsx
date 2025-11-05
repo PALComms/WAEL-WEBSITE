@@ -12,12 +12,12 @@ function TopHeader({ remainingBlog = [], featuredBlog = {} }) {
       <div className="grid md:grid-cols-2 gap-6 max-w-8xl mx-auto">
         {/* Left: Featured Post */}
         <div
-          onClick={() => push(`/resources/blog/${featuredBlog.slug}`)}
+          onClick={() => push(`/resources/blog/post?slug=${featuredBlog.slug.current}`)}
           role="button"
           className="relative cursor-pointer rounded-md overflow-hidden"
         >
           <Image
-            src={featuredBlog.imageUrl}
+            src={featuredBlog.imageUrl || '/blog-placeholder.jpg'}
             alt={featuredBlog.title}
             width={800}
             height={500}
@@ -36,13 +36,13 @@ function TopHeader({ remainingBlog = [], featuredBlog = {} }) {
         <div className="grid gap-4">
           {remainingBlog?.map((post) => (
             <div
-              onClick={() => push(`/resources/blog/${post.slug}`)}
+              onClick={() => push(`/resources/blog/post?slug${post.slug.current}`)}
               key={post._id}
               className="grid md:grid-cols-2 gap-4 items-start"
             >
               <div className="relative rounded-md overflow-hidden">
                 <Image
-                  src={post.imageUrl}
+                  src={post.imageUrl || '/blog-placeholder.jpg'}
                   alt={post.title}
                   width={400}
                   height={250}
@@ -64,7 +64,7 @@ function TopHeader({ remainingBlog = [], featuredBlog = {} }) {
 }
 
 export default function BlogHeader({ blog = [] }) {
-  const featuredBlog = blog.find((post) => post.featured) || posts[0];
+  const featuredBlog = blog?.find((post) => post.featured) || blog[0];
   const { push } = useRouter();
 
   // Get remaining posts (excluding featured)

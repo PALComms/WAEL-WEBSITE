@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 export default function NewsHeader({ news = [] }) {
   // Filter for trending news category
   const { push } = useRouter();
-
+console.log(news)
   const trendingNews = news
-    ?.filter((item) => item?.category?.toLowerCase() === "trending")
+    ?.filter((item) => item?.category?.title?.toLowerCase() === "trending")
     ?.sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
@@ -68,7 +68,7 @@ export default function NewsHeader({ news = [] }) {
 
   if (!recentTrending)
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500">
+      <div className="min-h-[40vh] flex items-center justify-center text-gray-500">
         No trending news available.
       </div>
     );
@@ -129,7 +129,7 @@ export default function NewsHeader({ news = [] }) {
               </p>
             </div>
             <button
-              onClick={() => push(`/resources/news/${recentTrending.slug}`)}
+              onClick={() => push(`/resources/news/post/?slug=${recentTrending.slug}`)}
               className="mt-4 px-5 py-2 border border-gray-800 rounded-full hover:bg-gray-900 hover:text-white transition-all"
             >
               Continue Reading

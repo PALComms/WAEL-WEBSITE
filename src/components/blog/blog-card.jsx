@@ -90,7 +90,7 @@ const BlogCard = () => {
 
                 {/* Read More Link */}
                 <Link
-                  href={`/blog/${post.id}`}
+                  href={`/resources/blog/post?slug=${post.id}`}
                   className="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors duration-200"
                 >
                   Read More

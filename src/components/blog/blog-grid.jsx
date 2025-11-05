@@ -6,12 +6,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const CompactBlogGrid = ({ blog }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 8;
-
+console.log(blog);
   // Find featured post
-  const featuredPost = blog.find((post) => post.featured) || blog[0];
+  const featuredPost = blog?.find((post) => post.featured) || blog[0];
 
   // Get remaining posts (excluding featured)
-  const remainingPosts = blog.filter((post) => post._id !== featuredPost._id);
+  const remainingPosts = blog?.filter((post) => post._id !== featuredPost._id);
 
   // Calculate pagination
   const totalPages = Math.ceil(remainingPosts.length / postsPerPage);
@@ -72,8 +72,8 @@ const CompactBlogGrid = ({ blog }) => {
       {/* Featured Blog Post */}
       <div className="w-full h-96 relative rounded-lg overflow-hidden group">
         <Image
-          src={featuredPost.imageUrl || "/blog-bg.jpg"}
-          alt={featuredPost.title}
+          src={featuredPost?.imageUrl || "/blog-bg.jpg"}
+          alt={featuredPost?.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
@@ -81,16 +81,16 @@ const CompactBlogGrid = ({ blog }) => {
         <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
           <div className="mb-3">
             <span className="inline-block bg-white bg-opacity-90 text-gray-900 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-              {featuredPost.category || "Technology"}
+              {featuredPost?.category?.title || "Technology"}
             </span>
           </div>
           <h2 className="text-2xl font-bold mb-4 leading-tight">
-            {featuredPost.title}
+            {featuredPost?.title}
           </h2>
           <div className="flex items-center text-white text-sm">
-            <span className="font-semibold">{featuredPost.author}</span>
+            <span className="font-semibold">{featuredPost?.author.name}</span>
             <span className="mx-2">•</span>
-            <span>{formatDate(featuredPost.publishedAt)}</span>
+            <span>{formatDate(featuredPost?.publishedAt)}</span>
           </div>
         </div>
       </div>
@@ -101,36 +101,36 @@ const CompactBlogGrid = ({ blog }) => {
           {currentPosts?.map((post) => (
             <div
               key={post._id}
-              onClick={() => window.open(`/resources/blog/${post.slug}`, "_blank")}
+              onClick={() => window.open(`/resources/blog/post?slug=${post.slug}`, "_blank")}
               className="bg-white cursor-pointer border border-gray-200 p-3 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200"
             >
               <div className="relative h-40 w-full">
                 <Image
-                  src={post.imageUrl || "/blog-placeholder.jpg"}
-                  alt={post.title}
+                  src={post?.imageUrl || "/blog-placeholder.jpg"}
+                  alt={post?.title}
                   fill
                   className="object-cover rounded-xl"
                 />
               </div>
               <div className="mt-6">
                 <span className="inline-block bg-[#4B6BFB0D] text-[#4B6BFB] text-xs font-medium px-2.5 py-0.5 rounded mb-2">
-                  {post.category}
+                  {post?.category}
                 </span>
                 <h3 className="font-semibold text-gray-900 text-xl md:text-2xl mb-2 line-clamp-2 leading-tight">
-                  {post.title}
+                  {post?.title}
                 </h3>
                 <div className="flex items-center mt-10 gap-2 text-gray-600 text-xs">
                   <div className="relative h-10 w-10">
                     <Image
-                      src={post.imageUrl || "/blog-placeholder.jpg"}
-                      alt={post.title}
+                      src={post?.imageUrl || "/blog-placeholder.jpg"}
+                      alt={post?.title}
                       fill
                       className="object-cover rounded-full"
                     />
                   </div>
-                  <span className="font-medium">{post.author}</span>
+                  <span className="font-medium">{post?.author}</span>
                   <span className="mx-1">•</span>
-                  <span>{formatDate(post.publishedAt)}</span>
+                  <span>{formatDate(post?.publishedAt)}</span>
                 </div>
               </div>
             </div>
