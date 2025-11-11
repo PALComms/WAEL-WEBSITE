@@ -50,7 +50,7 @@ export default function Footer() {
     },
     {
       icon: FaInstagram,
-      href: "https://www.instagram.com/prime.atlantic?igsh=MWp6ajY2b2V3cjkxMQ==",
+      href: "https://www.instagram.com/_wael.ng?igsh=MWZwZjF6dmttaDdoeg==",
       label: "Instagram",
     },
     {
