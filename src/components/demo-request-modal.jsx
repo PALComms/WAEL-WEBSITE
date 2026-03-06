@@ -15,24 +15,12 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
   const [status, setStatus] = useState(null);
 
   const sectorOptions = [
-    "Technology",
+    "Oil & Gas",
     "Healthcare",
-    "Finance & Banking",
-    "Education",
+    "Finance",
     "Manufacturing",
-    "Retail & E-commerce",
-    "Energy & Utilities",
-    "Transportation & Logistics",
-    "Construction & Engineering",
-    "Government & Public Sector",
-    "Non-profit & NGOs",
-    "Hospitality & Tourism",
-    "Agriculture",
-    "Pharmaceuticals",
-    "Telecommunications",
-    "Media & Entertainment",
-    "Real Estate",
-    "Professional Services",
+    "Retail",
+    "Telecoms",
     "Other",
   ];
 
@@ -138,7 +126,7 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name
+                      Full Name (First and Surname)
                     </label>
                     <input
                       type="text"
@@ -146,6 +134,7 @@ const DemoRequestModal = ({ isOpen, onClose }) => {
                       value={formData.fullName}
                       onChange={handleInputChange}
                       required
+                      placeholder="John Doe"
                       className="w-full px-3 py-2 border-0 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>

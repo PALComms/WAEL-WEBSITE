@@ -10,47 +10,28 @@ export default function ContactForm() {
     companyName: "",
     companyEmail: "",
     sector: "",
-    services: []
+    services: [],
   });
 
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState({ show: false, type: "", message: "" });
 
   const sectorOptions = [
-    "Technology",
+    "Oil & Gas",
     "Healthcare",
-    "Finance & Banking",
-    "Education",
+    "Finance",
     "Manufacturing",
-    "Retail & E-commerce",
-    "Energy & Utilities",
-    "Transportation & Logistics",
-    "Construction & Engineering",
-    "Government & Public Sector",
-    "Non-profit & NGOs",
-    "Hospitality & Tourism",
-    "Agriculture",
-    "Pharmaceuticals",
-    "Telecommunications",
-    "Media & Entertainment",
-    "Real Estate",
-    "Professional Services",
+    "Retail",
+    "Telecoms",
     "Other",
   ];
 
   const serviceOptions = [
-    "Web Development",
-    "Mobile App Development",
-    "UI/UX Design",
-    "Digital Marketing",
-    "SEO Services",
-    "Cloud Solutions",
-    "Data Analytics",
-    "AI & Machine Learning",
-    "IT Consulting",
-    "Software Maintenance",
-    "E-commerce Solutions",
-    "Custom Software Development"
+    "Trotter – Personnel Onboarding & Tracking",
+    "Software Development",
+    "OnQ DRaaS – Business Continuity & Disaster Recovery",
+    "Data Management & Analysis",
+    "Onshore Safety Permit (OSP)",
   ];
 
   const handleInputChange = (e) => {
@@ -61,7 +42,7 @@ export default function ContactForm() {
   const handleServiceChange = (service) => {
     setFormData((prev) => {
       const services = prev.services.includes(service)
-        ? prev.services.filter(s => s !== service)
+        ? prev.services.filter((s) => s !== service)
         : [...prev.services, service];
       return { ...prev, services };
     });
@@ -73,21 +54,22 @@ export default function ContactForm() {
 
     try {
       const res = await fetch("https://wael-server-1.onrender.com/api/send-email", {
+      // const res = await fetch("http://localhost:6600/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          formType: "contact", 
-          ...formData 
+        body: JSON.stringify({
+          formType: "contact",
+          ...formData,
         }),
       });
 
       const data = await res.json();
-
       if (res.ok) {
         setPopup({
           show: true,
           type: "success",
-          message: "✅ Message sent successfully!",
+          message:
+            "Your response has been successfully submitted. A member of our team will review your request and get back to you within 24 hours. Thank you for reaching out to us.",
         });
         // Reset form
         setFormData({
@@ -95,7 +77,7 @@ export default function ContactForm() {
           companyName: "",
           companyEmail: "",
           sector: "",
-          services: []
+          services: [],
         });
       } else {
         throw new Error(data.message || "Something went wrong.");
@@ -129,21 +111,25 @@ export default function ContactForm() {
 
       {/* Contact Card */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[500px] py-12 px-4 sm:px-6 lg:px-8">
-        <form onSubmit={handleSubmit} className="w-full max-w-6xl p-6 space-y-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg">
-        <h3 className="text-[#113264] font-bold text-lg md:text-3xl uppercase mb-10">
-          Contact Form
-        </h3>
-        
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-6xl p-6 space-y-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg"
+        >
+          <h3 className="text-[#113264] font-bold text-lg md:text-3xl uppercase mb-10">
+            Contact Form
+          </h3>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
+                Full Name (First and Surname)
               </label>
               <input
                 type="text"
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
+                placeholder="John Doe"
                 required
                 className="w-full px-3 py-2 border-0 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
               />
@@ -270,7 +256,7 @@ export default function ContactForm() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className={`fixed bottom-6 right-6 px-5 py-3 rounded-xl text-white shadow-lg ${
+            className={`fixed z-99999 bottom-6 right-6 px-5 py-3 rounded-xl text-white shadow-lg ${
               popup.type === "success" ? "bg-green-600" : "bg-red-600"
             }`}
           >
@@ -281,3 +267,4 @@ export default function ContactForm() {
     </section>
   );
 }
+
